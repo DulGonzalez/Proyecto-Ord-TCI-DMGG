@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app_move:
+    container_name: aplicacionPeliculas
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/mydatabase
+
+  mongodb:
+    container_name: mongodb_data
+    image: mongo:4.4
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:
